@@ -1,0 +1,82 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/nicolas/.zshrc'
+
+# Completion settings
+autoload -Uz compinit
+compinit
+
+# End of lines added by compinstall
+# Auto suggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# shell keys
+# control left and right to move by words
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+# Add local ~/scripts to the PATH
+export PATH="$HOME/scripts:$PATH"
+
+# NOTE: FZF
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
+
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+export FZF_DEFAULT_OPTS="--height 50% --layout=default --border --color=hl:#2dd4bf"
+
+# Setup fzf previews
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always -n --line-range :500 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --icons=always --tree --color=always {} | head -200'"
+
+# fzf preview for tmux
+
+# ls
+alias ls="eza --color=always --icons=always"
+alias ll='eza -alF --icons=always'
+alias la='eza -A --icons=always'
+alias l='eza -F --icons=alwayss'
+
+
+# starship
+eval "$(starship init zsh)"
+
+# pipx
+export PATH="$PATH:/home/nicolas/.local/bin"
+
+# kdb/q
+export PATH="$PATH:/home/nicolas/q/l64"
+alias qce='rlwrap -f /home/nicolas/q/qRlwrapAutoComplete.txt q'
+alias developer='source /home/nicolas/developer/config/config.profile; q /home/nicolas/developer/launcher.q_ '
+
+# tmux
+# source-file ~/.config/tmux/.tmux.conf
+
+# rust
+. "$HOME/.cargo/env"
+
+# dotnet
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH="$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools"
+
+# yazi
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# uv related
+. "$HOME/.local/share/../bin/env"
