@@ -50,9 +50,6 @@ alias l='eza -F --icons=alwayss'
 # starship
 eval "$(starship init zsh)"
 
-# pipx
-export PATH="$PATH:/home/nicolas/.local/bin"
-
 # kdb/q
 export PATH="$PATH:/home/nicolas/q/l64"
 alias qce='rlwrap -f /home/nicolas/q/qRlwrapAutoComplete.txt q'
