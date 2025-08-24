@@ -77,3 +77,9 @@ function y() {
 
 # uv related
 . "$HOME/.local/share/../bin/env"
+
+# go
+export PATH="$PATH:$HOME/tools/go/bin"
+
+# bat
+alias bat="batcat"

@@ -1,9 +1,1 @@
-[window]
-title="Alacritty Terminal"
-opacity = 0.95
-
-[font]
-normal.family = "JetBrains Mono"
-bold.family = "JetBrains Mono" 
-italic.family = "JetBrains Mono"
-bold_italic.family = "JetBrains Mono"
+import = [ "~/.config/alacritty/theme.toml", "~/.config/alacritty/font.toml", "~/.config/alacritty/font-size.toml", "~/.config/alacritty/shared.toml" ]
